@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div id="home-layout" class="two-col one-col">
+    <section class="panel">
+      <h1>Browse & Borrow</h1>
+      <form id="search-form" class="form-inline">
+        <input type="text" id="search-input" placeholder="Search by title, author, ISBN" />
+        <button type="submit">Search</button>
+      </form>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN</th>
+              <th>Available</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="books-body"></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <span id="total-count"></span>
+        <button id="prev-page" disabled>Prev</button>
+        <span id="page-info"></span>
+        <button id="next-page" disabled>Next</button>
+      </div>
+    </section>
+
+    <section id="loans-panel" class="panel hidden">
+      <h2>Your Loans</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Book</th>
+              <th>Borrowed</th>
+              <th>Returned</th>
+            </tr>
+          </thead>
+          <tbody id="loans-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+

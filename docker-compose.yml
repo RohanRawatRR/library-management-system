@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    entrypoint: ["/bin/sh", "-c", "chmod +x /app/entrypoint.sh && exec /app/entrypoint.sh"]
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-library_db}
+      POSTGRES_USER: ${POSTGRES_USER:-library_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-library_pass}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_HOST_PORT:-5432}:5432"
+
+volumes:
+  postgres_data:
+
+

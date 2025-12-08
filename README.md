@@ -50,6 +50,11 @@ Containers start in the background; entrypoint handles migrations & collectstati
 - Redoc: `/redoc/`
 - JSON/YAML: `/swagger.json`, `/swagger.yaml`
 
+### Frontend filters/search (Books)
+- Search by title/author/ISBN via the search box.
+- Availability filter (available/not available).
+- Pagination (prev/next) with total count shown; filters persist across pages.
+
 ### Helpful scripts
 - `run.sh` — installs deps, runs migrations & collectstatic, starts dev server.
 - `run_docker.sh` — builds/starts Docker stack, migrations handled in entrypoint.

@@ -9,19 +9,23 @@ const booksBody = document.getElementById("books-body");
 const loansBody = document.getElementById("loans-body");
 const loansPanel = document.getElementById("loans-panel");
 const homeLayout = document.getElementById("home-layout");
-const searchForm = document.getElementById("search-form");
 const searchInput = document.getElementById("search-input");
+const availableSelect = document.getElementById("available-select");
+const resetFiltersBtn = document.getElementById("reset-filters");
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
 const toastContainer = document.getElementById("toast-container");
 const prevPageBtn = document.getElementById("prev-page");
 const nextPageBtn = document.getElementById("next-page");
 const pageInfo = document.getElementById("page-info");
+const applyFiltersBtn = document.getElementById("apply-filters");
 const totalCount = document.getElementById("total-count");
 
 let nextPage = null;
 let prevPage = null;
 let currentPage = 1;
+let currentQuery = "";
+let currentAvailable = "";
 
 function redirectAuthPagesIfLoggedIn() {
   const path = window.location.pathname;
@@ -98,7 +102,13 @@ function updatePagination(meta) {
 }
 
 async function loadBooks(url) {
-  const targetUrl = url || `${API_BASE}/books/`;
+  const targetUrl =
+    url ||
+    `${API_BASE}/books/?` +
+      new URLSearchParams({
+        q: currentQuery || "",
+        available: currentAvailable || "",
+      }).toString();
   const data = await fetchJSON(targetUrl);
   if (!booksBody) return;
   booksBody.innerHTML = "";
@@ -163,11 +173,18 @@ async function loadLoans() {
 }
 
 function bindHandlers() {
-  searchForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const q = searchInput.value.trim();
-    const url = q ? `${API_BASE}/books/?q=${encodeURIComponent(q)}` : `${API_BASE}/books/`;
-    loadBooks(url);
+  applyFiltersBtn?.addEventListener("click", () => {
+    currentQuery = searchInput.value.trim();
+    currentAvailable = availableSelect?.value || "";
+    loadBooks();
+  });
+
+  resetFiltersBtn?.addEventListener("click", () => {
+    currentQuery = "";
+    currentAvailable = "";
+    if (searchInput) searchInput.value = "";
+    if (availableSelect) availableSelect.value = "";
+    loadBooks();
   });
 
   prevPageBtn?.addEventListener("click", () => {

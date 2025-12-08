@@ -54,10 +54,36 @@ a {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.form-inline {
+.filter-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: end;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-field label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.filter-actions {
   display: flex;
   gap: 8px;
-  margin-bottom: 12px;
+}
+
+#available-select {
+  background: #0b1222;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
 }
 
 input,
@@ -95,6 +121,7 @@ th,
 td {
   padding: 10px;
   border-bottom: 1px solid var(--border);
+  text-align: center;
 }
 
 .grid {

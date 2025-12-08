@@ -4,10 +4,24 @@
   <div id="home-layout" class="two-col one-col">
     <section class="panel">
       <h1>Browse & Borrow</h1>
-      <form id="search-form" class="form-inline">
-        <input type="text" id="search-input" placeholder="Search by title, author, ISBN" />
-        <button type="submit">Search</button>
-      </form>
+      <div class="filter-bar">
+        <div class="filter-field">
+          <label for="search-input">Search</label>
+          <input type="text" id="search-input" placeholder="Title, author, ISBN" />
+        </div>
+        <div class="filter-field">
+          <label for="available-select">Availability</label>
+          <select id="available-select">
+            <option value="">Any</option>
+            <option value="true">Available</option>
+            <option value="false">Not available</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button type="button" id="apply-filters">Apply</button>
+          <button type="button" id="reset-filters">Reset</button>
+        </div>
+      </div>
       <div class="table-wrapper">
         <table>
           <thead>

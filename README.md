@@ -65,6 +65,12 @@ Create a superuser if needed:
 python manage.py createsuperuser
 ```
 
+### Testing
+Run unit/integration tests:
+```sh
+python manage.py test
+```
+
 ### Deployment notes (Heroku/others)
 - `Procfile` provided (`release` runs migrations, `web` runs gunicorn).
 - `runtime.txt` pins Python version.
